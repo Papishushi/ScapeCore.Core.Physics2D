@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/Papishushi/ScapeCore.Core.Physics2D</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ScapeCore.Core.Engine" Version="1.0.6" />
+    <PackageReference Include="ScapeCore.Core.Engine" Version="*" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,13 +23,17 @@
 using Microsoft.Xna.Framework;
 using ScapeCore.Core.Engine;
 using ScapeCore.Core.Engine.Components;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static ScapeCore.Core.Physics2D.Collider2D;
+
+using static ScapeCore.Traceability.Debug.Debugger;
+using static ScapeCore.Traceability.Logging.LoggingColor;
+
 
 namespace ScapeCore.Core.Physics2D
 {
@@ -164,7 +168,7 @@ namespace ScapeCore.Core.Physics2D
             Vector2 adjustedPosition = transform.Position;
             float adjustmentMagnitude = Vector2.Distance(_oldPosition, adjustedPosition);
             if (adjustmentMagnitude > adjustmentThreshold)
-                Log.Warning("Large position adjustment: {AdjustmentMagnitude}", adjustmentMagnitude);
+                SCLog.Log(WARNING, $"Large position adjustment: {Yellow}{adjustmentMagnitude}{Default}");
 
             ResolveSpeedAndApplyForces(deltaTime);
 

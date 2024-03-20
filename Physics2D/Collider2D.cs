@@ -18,7 +18,6 @@
 using Microsoft.Xna.Framework;
 using ScapeCore.Core.Engine;
 using ScapeCore.Core.Engine.Components;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
