@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static ScapeCore.Core.Physics2D.Collider2D;
 
-using static ScapeCore.Traceability.Debug.Debugger;
+using static ScapeCore.Core.Debug.Debugger;
 using static ScapeCore.Traceability.Logging.LoggingColor;
 
 
@@ -168,7 +168,7 @@ namespace ScapeCore.Core.Physics2D
             Vector2 adjustedPosition = transform.Position;
             float adjustmentMagnitude = Vector2.Distance(_oldPosition, adjustedPosition);
             if (adjustmentMagnitude > adjustmentThreshold)
-                SCLog.Log(WARNING, $"Large position adjustment: {Yellow}{adjustmentMagnitude}{Default}");
+                SCLog.Log(WARNING, $"Large position adjustment: {Yellow}{adjustmentMagnitude}{Traceability.Logging.LoggingColor.Default}");
 
             ResolveSpeedAndApplyForces(deltaTime);
 
