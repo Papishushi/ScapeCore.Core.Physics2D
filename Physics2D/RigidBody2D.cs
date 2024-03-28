@@ -80,11 +80,11 @@ namespace ScapeCore.Core.Physics2D
             }
         }
 
-        public float GetDeltaTime(GameTime gameTime)
+        public float GetDeltaTime(GameTime? gameTime)
         {
             double seconds, milliseconds;
-            seconds = gameTime.ElapsedGameTime.TotalSeconds;
-            milliseconds = gameTime.ElapsedGameTime.TotalMilliseconds;
+            seconds = gameTime?.ElapsedGameTime.TotalSeconds ?? 0;
+            milliseconds = gameTime?.ElapsedGameTime.TotalMilliseconds ?? 0;
             return (float)seconds + ((float)milliseconds / 1000);
         }
 
@@ -115,7 +115,7 @@ namespace ScapeCore.Core.Physics2D
         }
 
         public void CalculateCollisionsAndApplyForces(float deltaTime) => CalculateCollisionsLogic(deltaTime);
-        public void CalculateCollisionsAndApplyForces(GameTime gameTime, float timeStepFactor) => CalculateCollisionsLogic(GetDeltaTime(gameTime) * timeStepFactor);
+        public void CalculateCollisionsAndApplyForces(GameTime? gameTime, float timeStepFactor) => CalculateCollisionsLogic(GetDeltaTime(gameTime) * timeStepFactor);
 
         public void ResolveCollisionsOverlap()
         {
@@ -158,7 +158,7 @@ namespace ScapeCore.Core.Physics2D
         }
 
         public void ResolveSpeedAndApplyForces(float deltaTime) => ResolveSpeedLogic(deltaTime);
-        public void ResolveSpeedAndApplyForces(GameTime gameTime, float timeStepFactor) => ResolveSpeedLogic(GetDeltaTime(gameTime) * timeStepFactor);
+        public void ResolveSpeedAndApplyForces(GameTime? gameTime, float timeStepFactor) => ResolveSpeedLogic(GetDeltaTime(gameTime) * timeStepFactor);
 
 
         public void FixedUpdateWrapper(GameTime time, float timeStepFactor)
