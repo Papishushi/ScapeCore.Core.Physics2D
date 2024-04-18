@@ -48,17 +48,18 @@ namespace ScapeCore.Core.Physics2D
         public readonly record struct Impact2D(Collider2D Collision, Vector2 Normal);
         internal List<Impact2D> IsIntersecting()
         {
-            List<Impact2D> result = new List<Impact2D>();
-            foreach (var collider in _colliders)
+            List<Impact2D> result = [];
+            foreach (var collider in _colliders.ToList())
             {
-                if (collider == this) continue;
+                if (collider == null || collider == this) continue;
+
                 var rb = collider.attachedRigidbody;
                 if (rb == null || rb.transform == null || transform == null)
                     continue;
 
 
-                float deltaX = Math.Abs(transform.Position.X - rb.transform.Position.X);
-                float deltaY = Math.Abs(transform.Position.Y - rb.transform.Position.Y);
+                float deltaX = Math.Abs(transform?.Position.X - rb.transform?.Position.X ?? 0);
+                float deltaY = Math.Abs(transform?.Position.Y - rb.transform?.Position.Y ?? 0);
 
                 float intersectX = (size.X + collider.size.X) * 0.5f;
                 float intersectY = (size.Y + collider.size.Y) * 0.5f;

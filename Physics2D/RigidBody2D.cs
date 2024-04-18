@@ -90,6 +90,7 @@ namespace ScapeCore.Core.Physics2D
 
         private void CalculateCollisionsLogic(float deltaTime)
         {
+            if (transform == null) return;
             _impacts = _attachedColliders.First().IsIntersecting();
             _impacts.ForEach(x => _colliding.Add(x.Collision));
 
@@ -99,7 +100,7 @@ namespace ScapeCore.Core.Physics2D
                 if (collidedRb == null || collidedRb.transform == null)
                     continue;
 
-                var relativePosition = transform.Position - collidedRb.transform.Position;
+                var relativePosition = (transform?.Position ?? Vector2.Zero) - collidedRb.transform.Position;
                 var relativeVelocity = _speed - collidedRb.Speed;
 
                 // Calculate impulse based on the relative velocity and position
@@ -119,11 +120,11 @@ namespace ScapeCore.Core.Physics2D
 
         public void ResolveCollisionsOverlap()
         {
+            if (transform == null) return;
             var _displacementMinThreshold = 0.85f;
 
             foreach (var impact in _impacts)
             {
-                var _displacementMaxThreshold = impact.Normal.Length() * 0.5f;
                 var displacement = new Vector2(-impact.Normal.X, impact.Normal.Y);
 
                 if (Math.Abs(displacement.X) < _displacementMinThreshold)
@@ -136,6 +137,8 @@ namespace ScapeCore.Core.Physics2D
 
         private void ResolveSpeedLogic(float deltaTime)
         {
+            if (transform == null) return;
+
             // Assuming _force is a Vector2 representing external forces
             _acceleration = force / mass + gravity;
 
@@ -154,7 +157,7 @@ namespace ScapeCore.Core.Physics2D
             if (Math.Abs(_speed.Y) < _speedThreshold)
                 _speed.Y = 0;
 
-            transform.Position += _speed;
+            if (transform != null) transform.Position += _speed;
         }
 
         public void ResolveSpeedAndApplyForces(float deltaTime) => ResolveSpeedLogic(deltaTime);
